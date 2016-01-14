@@ -11,22 +11,22 @@ namespace tdukaric_zadaca_1
     /// </summary>
     public interface IComponent
     {
-        void dodajKomponentu(IComponent com);
-        void makniKomponentu(int i);
-        void makniKomponentu(IComponent i);
-        IComponent pronadiKomponentu(int i);
-        IComponent pronadiKomponentu(string Ime);
-        IComponent pronadiKomponentuUDirektoriju(string Ime);
-        string prikazi(int i);
-        void izracunajVelicinu();
+        void AddComponent(IComponent com);
+        void RemoveComponent(int i);
+        void RemoveComponent(IComponent i);
+        IComponent FindComponent(int i);
+        IComponent FindComponent(string Ime);
+        IComponent FindComponentInFolder(string Ime);
+        string Show(int i);
+        void CalculateSize();
 
-        int Oznaka { get; set; }
-        string Putanja { get; set; }
-        string Naziv { get; set; }
-        bool Direktorij { get; set; }
-        IComponent Korijen { get; set; }
-        long Velicina { get; set; }
-        bool DozvoliPisanje { get; set; }
-        bool Poveznica { get; set; }
+        int id { get; set; }
+        string path { get; set; }
+        string name { get; set; }
+        bool folder { get; set; }
+        IComponent root { get; set; }
+        long size { get; set; }
+        bool permitWriting { get; set; }
+        bool link { get; set; }
     }
 }

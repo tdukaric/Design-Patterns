@@ -11,76 +11,76 @@ namespace tdukaric_zadaca_1
     {
         private static exFAT instance;
 
-        public static exFAT GetInstance(string Putanja, string DS_TIP)
+        public static exFAT GetInstance(string path, string DS_Type)
         {
             if (instance == null)
             {
-                instance = new exFAT(Putanja, DS_TIP);
+                instance = new exFAT(path, DS_Type);
             }
             return instance;
         }
 
 
-        private exFAT(string Putanja, string DS_TIP)
+        private exFAT(string path, string DS_Type)
         {
-            this.DS_TIP = DS_TIP;
-            this.Oznaka = 0;
-            this.Glavni = new dir { Putanja = Putanja, Oznaka = 0, Naziv = Putanja, Korijen = null, Direktorij = true, Poveznica = false };
-            ucitajKompozite(Putanja, Glavni);
+            this.DS_Type = DS_Type;
+            this.id = 0;
+            this.main = new dir { path = path, id = 0, name = path, root = null, folder = true, link = false };
+            loadComposites(path, main);
         }
 
-        private void ucitajListove(string Putanja, IComponent Korijen)
+        private void loadLeafs(string path, IComponent root)
         {
 
-            string[] Datoteke = Directory.GetFiles(Putanja);
+            string[] folders = Directory.GetFiles(path);
 
-            foreach (string Datoteka in Datoteke)
+            foreach (string file in folders)
             {
-                this.Oznaka++;
-                FileInfo temp = new FileInfo(Datoteka);
+                this.id++;
+                FileInfo temp = new FileInfo(file);
                 file dat;
-                if (System.IO.File.GetAttributes(Datoteka).HasFlag(FileAttributes.ReparsePoint))
+                if (System.IO.File.GetAttributes(file).HasFlag(FileAttributes.ReparsePoint))
                 {
                     continue;
                 }
                 else
                 {
-                    dat = new file { Putanja = Datoteka, Naziv = temp.Name, Velicina = temp.Length, Oznaka = this.Oznaka, Direktorij = false, Korijen = Korijen, DozvoliPisanje = !temp.IsReadOnly };
+                    dat = new file { path = file, name = temp.Name, size = temp.Length, id = this.id, folder = false, root = root, permitWriting = !temp.IsReadOnly };
                 }
-                Korijen.dodajKomponentu(dat);
+                root.AddComponent(dat);
             }
         }
 
-        private void ucitajKompozite(string Putanja, IComponent Korijen)
+        private void loadComposites(string path, IComponent root)
         {
             try
             {
-                string[] Datoteke = Directory.GetFiles(Putanja, ".");
+                string[] files = Directory.GetFiles(path, ".");
             }
             catch
             {
-                Console.WriteLine("Direktorij ne postoji!");
+                Console.WriteLine("Directory doesn't exists!");
                 return;
             }
 
             try
             {
-                string[] Direktoriji = Directory.GetDirectories(Putanja);
-                foreach (string PutanjaDirektorija in Direktoriji)
+                string[] folders = Directory.GetDirectories(path);
+                foreach (string folderPath in folders)
                 {
-                    this.Oznaka++;
-                    dir Direktorij = null;
+                    this.id++;
+                    dir folder = null;
 
-                    if (System.IO.File.GetAttributes(PutanjaDirektorija).HasFlag(FileAttributes.ReparsePoint))
+                    if (System.IO.File.GetAttributes(folderPath).HasFlag(FileAttributes.ReparsePoint))
                         continue;
                     else
-                        Direktorij = new dir { Putanja = PutanjaDirektorija, Oznaka = this.Oznaka, Naziv = new DirectoryInfo(PutanjaDirektorija).Name, Direktorij = true, Korijen = Korijen, Poveznica = false };
+                        folder = new dir { path = folderPath, id = this.id, name = new DirectoryInfo(folderPath).Name, folder = true, root = root, link = false };
 
-                    Korijen.dodajKomponentu(Direktorij);
-                    ucitajKompozite(PutanjaDirektorija, Direktorij);
+                    root.AddComponent(folder);
+                    loadComposites(folderPath, folder);
                 }
-                ucitajListove(Putanja, Korijen);
-                Korijen.izracunajVelicinu();
+                loadLeafs(path, root);
+                root.CalculateSize();
             }
             catch
             {
@@ -88,42 +88,42 @@ namespace tdukaric_zadaca_1
             }
         }
 
-        private void kopirajDirektorij(string Sto, string Gdje, IComponent Korijen)
+        private void copyFolder(string what, string where, IComponent root)
         {
 
-            DirectoryInfo dir = new DirectoryInfo(Sto);
+            DirectoryInfo dir = new DirectoryInfo(what);
             DirectoryInfo[] dirs = dir.GetDirectories();
 
-            DirectoryInfo _dir = Directory.CreateDirectory(Gdje);
+            DirectoryInfo _dir = Directory.CreateDirectory(where);
 
-            this.Oznaka++;
-            dir Direktorij = null;
-            if (DS_TIP == "NTFS")
+            this.id++;
+            dir folder = null;
+            if (DS_Type == "NTFS")
             {
-                Direktorij = new dir { Putanja = _dir.FullName, Oznaka = this.Oznaka, Naziv = _dir.Name, Direktorij = true, Korijen = Korijen, Poveznica = System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint) };
+                folder = new dir { path = _dir.FullName, id = this.id, name = _dir.Name, folder = true, root = root, link = System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint) };
             }
-            else if (DS_TIP == "exFAT")
+            else if (DS_Type == "exFAT")
             {
                 if (!System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint))
-                    Direktorij = new dir { Putanja = _dir.FullName, Oznaka = this.Oznaka, Naziv = new DirectoryInfo(_dir.FullName).Name, Direktorij = true, Korijen = Korijen, Poveznica = false };
+                    folder = new dir { path = _dir.FullName, id = this.id, name = new DirectoryInfo(_dir.FullName).Name, folder = true, root = root, link = false };
             }
 
-            Korijen.dodajKomponentu(Direktorij);
+            root.AddComponent(folder);
 
             foreach (DirectoryInfo subdir in dirs)
             {
-                string temppath = Path.Combine(Gdje, subdir.Name);
-                kopirajDirektorij(subdir.FullName, temppath, Direktorij);
+                string temppath = Path.Combine(where, subdir.Name);
+                copyFolder(subdir.FullName, temppath, folder);
             }
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                this.Oznaka++;
-                string temppath = Path.Combine(Gdje, file.Name);
+                this.id++;
+                string temppath = Path.Combine(where, file.Name);
                 FileInfo temp = file.CopyTo(temppath, false);
 
-                file dat = new file { Putanja = temp.FullName, Naziv = temp.Name, Velicina = temp.Length, Oznaka = this.Oznaka, Direktorij = false, Korijen = Direktorij, DozvoliPisanje = !temp.IsReadOnly, Poveznica = System.IO.File.GetAttributes(temp.FullName).HasFlag(FileAttributes.ReparsePoint) };
-                Direktorij.dodajKomponentu(dat);
+                file dat = new file { path = temp.FullName, name = temp.Name, size = temp.Length, id = this.id, folder = false, root = folder, permitWriting = !temp.IsReadOnly, link = System.IO.File.GetAttributes(temp.FullName).HasFlag(FileAttributes.ReparsePoint) };
+                folder.AddComponent(dat);
 
             }
         }

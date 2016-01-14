@@ -3,19 +3,19 @@ namespace tdukaric_zadaca_1
 {
     public interface IFS
     {
-        int Oznaka { get; set; }
-        string DS_TIP { get; set; }
-        IComponent Glavni { get; set; }
+        int id { get; set; }
+        string DS_Type { get; set; }
+        IComponent main { get; set; }
 
-        void ispisiFS(IComponent Sto);
-        bool kopirajKomponentu(int _Sto, int _Gdje);
-        bool kopirajKomponentu(int Sto, int Gdje, string Naziv);
-        bool kreirajKomponentu(int Gdje, string Naziv, bool JeDirektorij);
-        bool kreirajKomponentuFS(int Gdje, string Naziv, bool JeDirektorij);
-        void makniKomponentu(int Sto);
-        void otvori(int Sto);
-        void premjestiKomponentu(int Sto, int Gdje);
-        string prikaziUnatrag(int Sto);
+        void PrintFS(IComponent what);
+        bool CopyComponent(int what, int where);
+        bool CopyComponent(int what, int where, string name);
+        bool CreateComponent(int where, string name, bool isDirectory);
+        bool CreateComponentOnFS(int where, string name, bool isDirectory);
+        void RemoveComponent(int what);
+        void Open(int what);
+        void MoveComponent(int what, int where);
+        string ShowReverse(int what);
     }
 
 }

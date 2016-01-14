@@ -9,234 +9,236 @@ namespace tdukaric_zadaca_1
 {
     abstract class FS : IFS
     {
-        public IComponent Glavni { get; set; }
-        public string DS_TIP { get; set; }
-        public int Oznaka { get; set; }
+        public IComponent main { get; set; }
+        public string DS_Type { get; set; }
+        public int id { get; set; }
 
-        public void premjestiKomponentu(int Sto, int Gdje)
+        public void MoveComponent(int what, int where)
         {
-            if (kopirajKomponentu(Sto, Gdje))
+            if (CopyComponent(what, where))
             {
-                makniKomponentu(Sto);
+                RemoveComponent(what);
             }
             else
-                Console.WriteLine("Greška, nemogu premjestiti.");
+                Console.WriteLine("Error, can't move.");
         }
 
-        public bool kopirajKomponentu(int _Sto, int _Gdje)
+        public bool CopyComponent(int what, int where)
         {
-            IComponent Sto = Glavni.pronadiKomponentu(_Sto);
-            IComponent Gdje = Glavni.pronadiKomponentu(_Gdje);
+            IComponent _what = main.FindComponent(what);
+            IComponent _where = main.FindComponent(where);
 
-            if (Sto == null || Gdje == null)
+            if (_what == null || _where == null)
             {
-                Console.WriteLine("Nemogu pronaći objekt!");
+                Console.WriteLine("Can't find an object!");
                 return false;
             }
-            if (Gdje.Direktorij)
-                if (Gdje.pronadiKomponentuUDirektoriju(Sto.Naziv) == null)
+            if (_where.folder)
+                if (_where.FindComponentInFolder(_what.name) == null)
                 {
 
                     IComponent temp;
-                    this.Oznaka++;
-                    if (Sto.Direktorij)
+                    this.id++;
+                    if (_what.folder)
                     {
-                        DirectoryInfo dir = Directory.CreateDirectory(Gdje.Putanja + '\\' + Sto.Naziv);
-                        kopirajDirektorij(Sto.Putanja, dir.FullName, Gdje);
+                        DirectoryInfo dir = Directory.CreateDirectory(_where.path + '\\' + _what.name);
+                        CopyDirectory(_what.path, dir.FullName, _where);
 
                     }
                     else
                     {
-                        string Destinacija = System.IO.Path.Combine(Gdje.Putanja, Sto.Naziv);
-                        System.IO.File.Copy(Sto.Putanja, Destinacija, true);
+                        string destination = System.IO.Path.Combine(_where.path, _what.name);
+                        System.IO.File.Copy(_what.path, destination, true);
 
-                        FileInfo DatotekaInfo = new FileInfo(Destinacija);
+                        FileInfo fileInfo = new FileInfo(destination);
 
-                        temp = new file { Oznaka = this.Oznaka, Naziv = Sto.Naziv, Korijen = Gdje, Putanja = Destinacija, Velicina = Sto.Velicina, DozvoliPisanje = !DatotekaInfo.IsReadOnly };
-                        Gdje.dodajKomponentu(temp);
+                        temp = new file { id = this.id, name = _what.name, root = _where, path = destination, size = _what.size, permitWriting = !fileInfo.IsReadOnly };
+                        _where.AddComponent(temp);
                     }
 
-                    Gdje.izracunajVelicinu();
+                    _where.CalculateSize();
 
                     return true;
                 }
                 else
-                    Console.WriteLine("Greška, provjerite ime.");
+                    Console.WriteLine("Error, check the name.");
             else
-                Console.WriteLine("Greška, ne mogu kopirati objekt.");
+                Console.WriteLine("Error, can't copy the object.");
             return false;
         }
 
-        private void kopirajDirektorij(string Sto, string Gdje, IComponent Korijen)
+        private void CopyDirectory(string what, string where, IComponent root)
         {
 
-            DirectoryInfo dir = new DirectoryInfo(Sto);
+            DirectoryInfo dir = new DirectoryInfo(what);
             DirectoryInfo[] dirs = dir.GetDirectories();
 
-            DirectoryInfo _dir = Directory.CreateDirectory(Gdje);
+            DirectoryInfo _dir = Directory.CreateDirectory(where);
 
-            this.Oznaka++;
-            dir Direktorij = null;
-            if (DS_TIP == "NTFS")
+            this.id++;
+            dir directory = null;
+            if (DS_Type == "NTFS")
             {
-                Direktorij = new dir { Putanja = _dir.FullName, Oznaka = this.Oznaka, Naziv = _dir.Name, Direktorij = true, Korijen = Korijen, Poveznica = System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint) };
+                directory = new dir { path = _dir.FullName, id = this.id, name = _dir.Name, folder = true, root = root, link = System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint) };
             }
-            else if (DS_TIP == "exFAT")
+            else if (DS_Type == "exFAT")
             {
                 if (!System.IO.File.GetAttributes(_dir.FullName).HasFlag(FileAttributes.ReparsePoint))
-                    Direktorij = new dir { Putanja = _dir.FullName, Oznaka = this.Oznaka, Naziv = new DirectoryInfo(_dir.FullName).Name, Direktorij = true, Korijen = Korijen, Poveznica = false };
+                    directory = new dir { path = _dir.FullName, id = this.id, name = new DirectoryInfo(_dir.FullName).Name, folder = true, root = root, link = false };
             }
 
-            Korijen.dodajKomponentu(Direktorij);
+            root.AddComponent(directory);
 
             foreach (DirectoryInfo subdir in dirs)
             {
-                string temppath = Path.Combine(Gdje, subdir.Name);
-                kopirajDirektorij(subdir.FullName, temppath, Direktorij);
+                string temppath = Path.Combine(where, subdir.Name);
+                CopyDirectory(subdir.FullName, temppath, directory);
             }
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                this.Oznaka++;
-                string temppath = Path.Combine(Gdje, file.Name);
+                this.id++;
+                string temppath = Path.Combine(where, file.Name);
                 FileInfo temp = file.CopyTo(temppath, false);
 
-                file dat = new file { Putanja = temp.FullName, Naziv = temp.Name, Velicina = temp.Length, Oznaka = this.Oznaka, Direktorij = false, Korijen = Direktorij, DozvoliPisanje = !temp.IsReadOnly, Poveznica = System.IO.File.GetAttributes(temp.FullName).HasFlag(FileAttributes.ReparsePoint) };
-                Direktorij.dodajKomponentu(dat);
+                file dat = new file { path = temp.FullName, name = temp.Name, size = temp.Length, id = this.id, folder = false, root = directory, permitWriting = !temp.IsReadOnly, link = System.IO.File.GetAttributes(temp.FullName).HasFlag(FileAttributes.ReparsePoint) };
+                directory.AddComponent(dat);
 
             }
         }
 
-        public bool kopirajKomponentu(int Sto, int Gdje, string Naziv)
+        public bool CopyComponent(int what, int where, string name)
         {
-            IComponent _Sto = Glavni.pronadiKomponentu(Sto);
-            string temp = _Sto.Naziv;
-            _Sto.Naziv = Naziv;
-            if (kopirajKomponentu(Sto, Gdje))
-                _Sto.Naziv = temp;
+            IComponent _what = main.FindComponent(what);
+            string temp = _what.name;
+            _what.name = name;
+            if (CopyComponent(what, where))
+                _what.name = temp;
             else
             {
-                _Sto.Naziv = Naziv;
+                _what.name = name;
                 return false;
             }
             return true;
         }
 
-        public void makniKomponentu(int Sto)
+        public void RemoveComponent(int what)
         {
-            IComponent _Sto = Glavni.pronadiKomponentu(Sto);
-            if (_Sto == null)
+            IComponent _what = main.FindComponent(what);
+            if (_what == null)
             {
                 Console.WriteLine("Can't find object.");
                 return;
             }
-            if (_Sto.Direktorij)
+            if (_what.folder)
             {
-                System.IO.DirectoryInfo DirektorijInfo = new System.IO.DirectoryInfo(_Sto.Putanja);
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(_what.path);
                 try
                 {
-                    DirektorijInfo.Delete(true);
+                    directoryInfo.Delete(true);
                 }
                 catch
                 {
-                    Console.WriteLine("Greška pri brisanju komponente.");
+                    Console.WriteLine("Can't delete the component.");
+                    return;
                 }
 
             }
             else
             {
-                System.IO.FileInfo DatotekaInfo = new System.IO.FileInfo(_Sto.Putanja);
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(_what.path);
                 try
                 {
-                    DatotekaInfo.Delete();
+                    fileInfo.Delete();
                 }
                 catch
                 {
-                    Console.WriteLine("Greška pri brisanju komponente.");
+                    Console.WriteLine("Can't delete the component.");
+                    return;
                 }
             }
-            _Sto.Korijen.makniKomponentu(_Sto);
+            _what.root.RemoveComponent(_what);
         }
 
-        public void ispisiFS(IComponent root)
+        public void PrintFS(IComponent root)
         {
-            Console.WriteLine(root.prikazi(0));
+            Console.WriteLine(root.Show(0));
         }
 
-        public bool kreirajKomponentu(int Gdje, string Naziv, bool JeDirektorij)
+        public bool CreateComponent(int where, string name, bool isDirectory)
         {
-            IComponent _Gdje = Glavni.pronadiKomponentu(Gdje);
-            if (!_Gdje.Direktorij)
+            IComponent _where = main.FindComponent(where);
+            if (!_where.folder)
             {
-                Console.WriteLine("Destinacija mora biti direktorij!");
+                Console.WriteLine("Destination has to be a directory!");
                 return false;
             }
             else
             {
-                this.Oznaka++;
-                IComponent Korijen = null;
-                if (JeDirektorij)
+                this.id++;
+                IComponent root = null;
+                if (isDirectory)
                 {
-                    Korijen = new dir { Putanja = _Gdje.Putanja + '\\' + Naziv, Oznaka = this.Oznaka, Naziv = Naziv, Direktorij = true, Korijen = _Gdje, Poveznica = false };
+                    root = new dir { path = _where.path + '\\' + name, id = this.id, name = name, folder = true, root = _where, link = false };
                 }
                 else
                 {
-                    Korijen = new file { Putanja = _Gdje.Putanja + '\\' + Naziv, Oznaka = this.Oznaka, Naziv = Naziv, Direktorij = false, Korijen = _Gdje, Poveznica = false, DozvoliPisanje = true };
+                    root = new file { path = _where.path + '\\' + name, id = this.id, name = name, folder = false, root = _where, link = false, permitWriting = true };
                 }
-                if (Korijen == null)
+                if (root == null)
                     return false;
                 else
                 {
-                    _Gdje.dodajKomponentu(Korijen);
-                    _Gdje.izracunajVelicinu();
+                    _where.AddComponent(root);
+                    _where.CalculateSize();
                 }
             }
             return true;
         }
 
-        public bool kreirajKomponentuFS(int Gdje, string Naziv, bool JeDirektorij)
+        public bool CreateComponentOnFS(int where, string name, bool isDirectory)
         {
-            IComponent _temp = Glavni.pronadiKomponentu(Gdje);
-            if ((_temp != null) && (Glavni.pronadiKomponentu(Gdje).pronadiKomponentuUDirektoriju(Naziv.ToLower()) == null))
+            IComponent _temp = main.FindComponent(where);
+            if ((_temp != null) && (main.FindComponent(where).FindComponentInFolder(name.ToLower()) == null))
             {
-                string Putanja = _temp.Putanja + '\\' + Naziv;
-                if (JeDirektorij)
+                string path = _temp.path + '\\' + name;
+                if (isDirectory)
                 {
-                    Directory.CreateDirectory(Putanja);
-                    return kreirajKomponentu(Gdje, Naziv, JeDirektorij);
+                    Directory.CreateDirectory(path);
+                    return CreateComponent(where, name, isDirectory);
                 }
                 else
                 {
-                    File.Create(Putanja);
-                    return kreirajKomponentu(Gdje, Naziv, JeDirektorij);
+                    File.Create(path);
+                    return CreateComponent(where, name, isDirectory);
                 }
             }
             else
             {
-                Console.WriteLine("Greška kod kreiranja komponente!");
+                Console.WriteLine("Can't delete the component!");
                 return false;
             }
         }
 
-        public String prikaziUnatrag(int Sto)
+        public String ShowReverse(int what)
         {
-            StringBuilder Rezultat = new StringBuilder();
-            IComponent _temp = Glavni.pronadiKomponentu(Sto);
-            while (_temp != null)
+            StringBuilder result = new StringBuilder();
+            IComponent _what = main.FindComponent(what);
+            while (_what != null)
             {
-                Rezultat.Append(_temp.Naziv);
-                Rezultat.Append('\\');
-                _temp = _temp.Korijen;
+                result.Append(_what.name);
+                result.Append('\\');
+                _what = _what.root;
             }
-            Rezultat = Rezultat.Remove(Rezultat.Length - 1, 1);
-            return Rezultat.ToString();
+            result = result.Remove(result.Length - 1, 1);
+            return result.ToString();
         }
 
-        public void otvori(int Sto)
+        public void Open(int what)
         {
-            IComponent _Sto = Glavni.pronadiKomponentu(Sto);
-            if (_Sto != null)
-                System.Diagnostics.Process.Start(_Sto.Putanja);
+            IComponent _what = main.FindComponent(what);
+            if (_what != null)
+                System.Diagnostics.Process.Start(_what.path);
         }
     }
 }

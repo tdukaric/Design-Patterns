@@ -11,107 +11,107 @@ namespace tdukaric_zadaca_1
     /// </summary>
     class dir : IComponent
     {
-        public bool Direktorij { get; set; }
-        public int Oznaka { get; set; }
-        public string Putanja { get; set; }
-        public string Naziv { get; set; }
-        private List<IComponent> Dijeca = new List<IComponent>();
-        public IComponent Korijen { get; set; }
-        public long Velicina { get; set; }
-        public bool DozvoliPisanje { get; set; }
-        public bool Poveznica { get; set; }
+        public bool folder { get; set; }
+        public int id { get; set; }
+        public string path { get; set; }
+        public string name { get; set; }
+        private List<IComponent> childrens = new List<IComponent>();
+        public IComponent root { get; set; }
+        public long size { get; set; }
+        public bool permitWriting { get; set; }
+        public bool link { get; set; }
 
-        public void dodajKomponentu(IComponent Komponenta)
+        public void AddComponent(IComponent Komponenta)
         {
-            Dijeca.Add(Komponenta);
-            izracunajVelicinu();
+            childrens.Add(Komponenta);
+            CalculateSize();
         }
 
-        public void makniKomponentu(IComponent i)
+        public void RemoveComponent(IComponent i)
         {
-            Dijeca.Remove(i);
-            izracunajVelicinu();
+            childrens.Remove(i);
+            CalculateSize();
         }
 
-        public void makniKomponentu(int i)
+        public void RemoveComponent(int i)
         {
-            IComponent Komponenta = pronadiKomponentu(i);
-            if (Komponenta != null)
-                Dijeca.Remove(Komponenta);
+            IComponent Component = FindComponent(i);
+            if (Component != null)
+                childrens.Remove(Component);
             else
                 Console.WriteLine("Can't delete component");
         }
 
         public IComponent getComponent(int i)
         {
-            return Dijeca[i];
+            return childrens[i];
         }
 
-        public IComponent pronadiKomponentu(int i)
+        public IComponent FindComponent(int i)
         {
-            if (Oznaka == i)
+            if (id == i)
                 return this;
             IComponent x = null;
-            foreach (IComponent c in Dijeca)
+            foreach (IComponent c in childrens)
             {
-                x = c.pronadiKomponentu(i);
+                x = c.FindComponent(i);
                 if (x != null)
                     return x;
             }
             return x;
         }
 
-        public IComponent pronadiKomponentu(string Naziv)
+        public IComponent FindComponent(string name)
         {
-            if (this.Naziv.ToLower() == Naziv.ToLower())
+            if (this.name.ToLower() == name.ToLower())
                 return this;
             IComponent x = null;
-            foreach (IComponent c in Dijeca)
+            foreach (IComponent c in childrens)
             {
-                x = c.pronadiKomponentu(Naziv);
+                x = c.FindComponent(name);
                 if (x != null)
                     return x;
             }
             return x;
         }
 
-        public IComponent pronadiKomponentuUDirektoriju(string Naziv)
+        public IComponent FindComponentInFolder(string name)
         {
-            if (this.Naziv.ToLower() == Naziv.ToLower())
+            if (this.name.ToLower() == name.ToLower())
                 return this;
-            foreach (IComponent c in Dijeca)
+            foreach (IComponent c in childrens)
             {
-                if (c.Naziv.ToLower() == Naziv.ToLower())
+                if (c.name.ToLower() == name.ToLower())
                     return this;
             }
             return null;
         }
 
-        public string prikazi(int Dubina)
+        public string Show(int depth)
         {
-            izracunajVelicinu();
-            StringBuilder Rezultat = new StringBuilder();
-            if (this.Korijen == null)
-                Rezultat.Append(String.Format("[{0,3}][{1}] {2, -30}     velicina: {3}\n", this.Oznaka, (this.Poveznica ? "L": "D"), new String(' ', Dubina) + this.Putanja, this.Velicina));
+            CalculateSize();
+            StringBuilder result = new StringBuilder();
+            if (this.root == null)
+                result.Append(String.Format("[{0,3}][{1}] {2, -30}     velicina: {3}\n", this.id, (this.link ? "L": "D"), new String(' ', depth) + this.path, this.size));
             else
-                Rezultat.Append(String.Format("[{0,3}][{1}] {2, -30}     velicina: {3}\n", this.Oznaka, (this.Poveznica ? "L" : "D"), new String(' ', Dubina) + this.Naziv, this.Velicina));
+                result.Append(String.Format("[{0,3}][{1}] {2, -30}     velicina: {3}\n", this.id, (this.link ? "L" : "D"), new String(' ', depth) + this.name, this.size));
 
-            foreach (IComponent component in Dijeca)
+            foreach (IComponent component in childrens)
             {
-                Rezultat.Append(component.prikazi(Dubina + 2));
+                result.Append(component.Show(depth + 2));
             }
-            return Rezultat.ToString();
+            return result.ToString();
         }
 
-        public void izracunajVelicinu()
+        public void CalculateSize()
         {
-            this.Velicina = 0;
-            foreach (IComponent Dijete in this.Dijeca)
+            this.size = 0;
+            foreach (IComponent child in this.childrens)
             {
-                if (!Dijete.Poveznica)
+                if (!child.link)
                 {
-                    Dijete.izracunajVelicinu();
-                    Velicina += Dijete.Velicina;
+                    child.CalculateSize();
+                    size += child.size;
                 }
             }
         }
