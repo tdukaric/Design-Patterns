@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="tdukaric_zadaca_4.Handler" Collapsed="true">
+    <Position X="4.5" Y="6" Width="1.5" />
+    <AssociationLine Name="Successor" Type="tdukaric_zadaca_4.Handler" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="6.562" />
+        <Point X="4.75" Y="6.954" />
+        <Point X="5.062" Y="6.954" />
+        <Point X="5.062" Y="6.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Successor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerMail" Collapsed="true">
+    <Position X="1.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerImage" Collapsed="true">
+    <Position X="6.25" Y="6.5" Width="2" />
+    <InheritanceLine Type="tdukaric_zadaca_4.Handler" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="6.562" />
+        <Point X="5.25" Y="7.062" />
+        <Point X="6.25" Y="7.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerVideo" Collapsed="true">
+    <Position X="1.75" Y="5" Width="2" />
+    <InheritanceLine Type="tdukaric_zadaca_4.Handler" FixedFromPoint="true">
+      <Path>
+        <Point X="4.625" Y="6" />
+        <Point X="4.625" Y="5.346" />
+        <Point X="3.75" Y="5.346" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerDocument" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="2.25" />
+    <InheritanceLine Type="tdukaric_zadaca_4.Handler" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="6.562" />
+        <Point X="5.25" Y="7.062" />
+        <Point X="4" Y="7.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerOther" Collapsed="true">
+    <Position X="6.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.COR" Collapsed="true">
+    <Position X="6.25" Y="5" Width="1.5" />
+    <AssociationLine Name="handle" Type="tdukaric_zadaca_4.Handler" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="5.454" />
+        <Point X="5.75" Y="5.454" />
+        <Point X="5.75" Y="6" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="handle" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Memento" Collapsed="true">
+    <Position X="8.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKAAAAAAAAAAEAQIAMAAAAAIAAAAmAAAAAAAAAA=</HashCode>
+      <FileName>Memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Caretaker" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Mementos" Type="tdukaric_zadaca_4.Memento" FixedFromPoint="true">
+      <Path>
+        <Point X="8.75" Y="5.062" />
+        <Point X="8.75" Y="6.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.938" Y="0.048" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Memento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="Mementos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_Controller">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="caretaker" Type="tdukaric_zadaca_4.Caretaker" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="4.625" />
+        <Point X="7.938" Y="4.625" />
+        <Point X="7.938" Y="4.625" />
+        <Point X="8" Y="4.625" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="myView" Type="tdukaric_zadaca_4.MVC_View" FixedToPoint="true">
+      <Path>
+        <Point X="4.562" Y="3.5" />
+        <Point X="4.562" Y="2.921" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.774" Y="0.165" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="myModel" Type="tdukaric_zadaca_4.MVC_Model" FixedFromPoint="true">
+      <Path>
+        <Point X="5.75" Y="4.062" />
+        <Point X="8" Y="4.062" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="spremiste" Type="tdukaric_zadaca_3.Spremiste" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.344" Y="3.5" />
+        <Point X="4.344" Y="2.375" />
+        <Point X="3.5" Y="2.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>OAAAQIAAAmAAiCAAAAEKAQAgAQACAIAwAAABQgAAAgQ=</HashCode>
+      <FileName>MVC_Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="activePage" />
+      <Field Name="caretaker" />
+      <Field Name="cor" />
+      <Field Name="myView" />
+      <Field Name="myModel" />
+      <Field Name="spremiste" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.updateViewOnChange" Collapsed="true">
+    <Position X="6.5" Y="1" Width="1.5" />
+    <AssociationLine Name="attachedControllers" Type="tdukaric_zadaca_4.MVC_Controller" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.188" Y="1.691" />
+        <Point X="7.188" Y="3.813" />
+        <Point X="5.75" Y="3.813" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="attachedViews" Type="tdukaric_zadaca_4.MVC_View" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.688" Y="1.691" />
+        <Point X="6.688" Y="2.225" />
+        <Point X="6" Y="2.225" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.092" Y="0.042" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="attachedControllers" />
+      <Field Name="attachedViews" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Update" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_Model">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="attachedControllers" Type="tdukaric_zadaca_4.MVC_Controller" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="4.312" />
+        <Point X="5.75" Y="4.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="attachedViews" Type="tdukaric_zadaca_4.MVC_View" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="2.562" />
+        <Point X="7.271" Y="2.562" Type="JumpStart" />
+        <Point X="7.104" Y="2.562" Type="JumpEnd" />
+        <Point X="6" Y="2.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAiIAAAAgCAAAEAUIAMAAACgIQAIA2AAAAAAAAgA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="attachedControllers" />
+      <Field Name="attachedViews" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_View" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="myController" Type="tdukaric_zadaca_4.MVC_Controller" FixedFromPoint="true">
+      <Path>
+        <Point X="5.312" Y="2.921" />
+        <Point X="5.312" Y="3.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.994" Y="0.257" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="myModel" Type="tdukaric_zadaca_4.MVC_Model" FixedFromPoint="true">
+      <Path>
+        <Point X="6" Y="2.812" />
+        <Point X="7.104" Y="2.812" Type="JumpStart" />
+        <Point X="7.271" Y="2.812" Type="JumpEnd" />
+        <Point X="8" Y="2.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAECIABAAAAAEAAAAAAAAAAIAAAoBAAAAAAAA=</HashCode>
+      <FileName>MVC_View.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="myController" />
+      <Field Name="myModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Program" Collapsed="true">
+    <Position X="1.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_3.DnevnikRada" Collapsed="true">
+    <Position X="2" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DnevnikRada.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_3.Page" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAACAAEAAIAAAAAAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_3.Spremiste" BaseTypeListCollapsed="true">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="page" Type="tdukaric_zadaca_3.Page">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.593" Y="0.131" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAgAAgEAAKAAAgAAAUAAAAAgAAAIAAAAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="page" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="Pages" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="tdukaric_zadaca_3.storage" Collapsed="true">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="tdukaric_zadaca_4.handler" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

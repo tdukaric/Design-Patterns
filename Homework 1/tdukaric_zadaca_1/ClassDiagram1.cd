@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="tdukaric_zadaca_1.dir" BaseTypeListCollapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAjIAAAAAAIAEAABAAAAAAAAABABAAAEAAAABAAA=</HashCode>
+      <FileName>composit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.221" Collapsed="true" />
+  </Class>
+  <Class Name="tdukaric_zadaca_1.FS">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQDAAAAAgAAQAAAiQIAAIAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>FS.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="tdukaric_zadaca_1.file" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAjIAAAAAAIAAAABAAAAAAAAABABAAAEAAAABAAA=</HashCode>
+      <FileName>leaf.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.336" />
+  </Class>
+  <Class Name="tdukaric_zadaca_1.Program">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="tdukaric_zadaca_1.IComponent">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAjIAAAAAAIAAAABAAAAAAAAABABAAAEAAAABAAA=</HashCode>
+      <FileName>component.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

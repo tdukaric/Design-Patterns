@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="tdukaric_zadaca_2.game" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>igra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.load" Collapsed="true">
+    <Position X="6.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAIAACAAAAA=</HashCode>
+      <FileName>load.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="teams" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.match">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <AssociationLine Name="takerTeamDiff" Type="tdukaric_zadaca_2.CareTakerTeams" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="4" />
+        <Point X="4.75" Y="4" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="takerRez" Type="tdukaric_zadaca_2.CareTakerResults" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.25" Y="5.375" />
+        <Point X="1.188" Y="5.375" />
+        <Point X="1.188" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAUQBAAAAAoAAAgAAAAABCAAAACAAAgAUgAAAAACAxA=</HashCode>
+      <FileName>match.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="timer" />
+      <Field Name="takerTeamDiff" />
+      <Field Name="takerTeam" />
+      <Field Name="takerRez" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="teams" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.MementoTeams" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="Teams" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.CareTakerTeams" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Old" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.OriginatorTeams" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Teams" Type="tdukaric_zadaca_2.team" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.438" Y="5.062" />
+        <Point X="6.438" Y="5.437" />
+        <Point X="5.562" Y="5.437" />
+        <Point X="5.562" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="Teams" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.MementoResults" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.CareTakerResults" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Old" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.OriginatorResults" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAgAAAAAAAAA=</HashCode>
+      <FileName>memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.PrintEfArg" Collapsed="true">
+    <Position X="4.25" Y="8" Width="1.5" />
+    <AssociationLine Name="t" Type="tdukaric_zadaca_2.team" FixedToPoint="true">
+      <Path>
+        <Point X="4.562" Y="8" />
+        <Point X="4.562" Y="6.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>observer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="t" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.PrintEfListener" Collapsed="true">
+    <Position X="2.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>observer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.Program" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.IState" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.thrown" Collapsed="true">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.weak" Collapsed="true">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.normal" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.Context" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="state" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.team" Collapsed="true">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBACAAQAAgBAAAAAAACAAAAAEAAAAAAAABCAAAAA=</HashCode>
+      <FileName>team.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_2.teams" Collapsed="true">
+    <Position X="5" Y="6.75" Width="1.5" />
+    <AssociationLine Name="Teams" Type="tdukaric_zadaca_2.team" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="6.75" />
+        <Point X="5.25" Y="6.406" />
+        <Point X="5.25" Y="6.406" />
+        <Point X="5.25" Y="6.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ranking" Type="tdukaric_zadaca_2.team">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.667" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAACAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>teams.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Teams" />
+      <Property Name="ranking" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="System.Threading.Timer" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Delegate Name="tdukaric_zadaca_2.handler" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>observer.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

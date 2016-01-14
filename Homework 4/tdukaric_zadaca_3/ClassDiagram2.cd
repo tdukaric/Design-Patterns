@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="tdukaric_zadaca_3.Page" Collapsed="true">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAACAAEAAIAAAAAAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_3.Spremiste" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAgAAgEAAKAAAgAAAUAAAAAgAAAIAAAAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="page" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="tdukaric_zadaca_3.storage" Collapsed="true">
+    <Position X="19" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spremiste.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_3.DnevnikRada" Collapsed="true">
+    <Position X="19" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DnevnikRada.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Program" Collapsed="true">
+    <Position X="15.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAECIABAAAAAEAAAAAAAAAAIAAAoBAAAAAAAA=</HashCode>
+      <FileName>MVC_View.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="tdukaric_zadaca_4.updateViewOnChange">
+    <Position X="10.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Update" Collapsed="true">
+    <Position X="20.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_Model" Collapsed="true">
+    <Position X="17.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAiIAAAAgCAAAEAUIAMAAACgIQAIA2AAAAAAAAgA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.MVC_Controller" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>OAAAQIAAAmAAiCAAAAEKAQAgAQACAIAwAAABQgAAAgQ=</HashCode>
+      <FileName>MVC_Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="activePage" />
+      <Field Name="caretaker" />
+      <Field Name="cor" />
+      <Field Name="spremiste" />
+      <Field Name="myModel" />
+      <Field Name="myView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Memento" Collapsed="true">
+    <Position X="20.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKAAAAAAAAAAEAQIAMAAAAAIAAAAmAAAAAAAAAA=</HashCode>
+      <FileName>Memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Caretaker">
+    <Position X="15.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.Handler" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerMail" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerImage" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerVideo" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerDocument" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.ConcreteHandlerOther" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tdukaric_zadaca_4.COR" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>ChainOfResponsibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="tdukaric_zadaca_4.handler" Collapsed="true">
+    <Position X="15.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVC_Model.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
