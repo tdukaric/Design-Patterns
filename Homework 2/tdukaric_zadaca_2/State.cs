@@ -31,7 +31,7 @@ namespace tdukaric_zadaca_2
         /// Gets or sets the prag.
         /// </summary>
         /// <value>The prag.</value>
-        public int prag { get; set; }
+        public int limit { get; set; }
 
         /// <summary>
         /// The n
@@ -85,7 +85,7 @@ namespace tdukaric_zadaca_2
         /// <param name="prag">The prag.</param>
         public weak(int prag)
         {
-            this.prag = prag;
+            this.limit = prag;
             this.n = 1;
         }
 
@@ -109,13 +109,13 @@ namespace tdukaric_zadaca_2
             if (rank >= old_rank)
             {
                 this.n++;
-                if (this.prag <= this.n)
+                if (this.limit <= this.n)
                 {
                     return new thrown();
                 }
             }
             else
-                return new normal(this.prag);
+                return new normal(this.limit);
             return this;
         }
 
@@ -132,7 +132,7 @@ namespace tdukaric_zadaca_2
         /// <param name="prag">The n.</param>
         public normal(int prag)
         {
-            this.prag = prag;
+            this.limit = prag;
         }
         /// <summary>
         /// Update "normal"
@@ -143,7 +143,7 @@ namespace tdukaric_zadaca_2
         public override IState Update(int rank, int old_rank)
         {
             if (rank > old_rank)
-                return new weak(prag);
+                return new weak(limit);
             else
                 return this;
         }
@@ -167,7 +167,7 @@ namespace tdukaric_zadaca_2
         public Context(IState state)
         {
             if (state is normal)
-                this.state = new normal(state.prag);
+                this.state = new normal(state.limit);
             else if (state is thrown)
                 this.state = new thrown();
             else

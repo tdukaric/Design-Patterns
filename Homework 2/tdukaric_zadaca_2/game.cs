@@ -34,35 +34,35 @@ namespace tdukaric_zadaca_2
         static public void play(string[] args)
         {
             string fileName = args[0];
-            int intervalSekunde;
-            int kontrolniInterval;
-            int prag = 2;
-            CareTakerTeams takerTim = new CareTakerTeams();
-            CareTakerResults takerRez = new CareTakerResults();
-            CareTakerTeams takerTimDiff = new CareTakerTeams();
+            int intervalSeconds;
+            int controlInterval;
+            int limit = 2;
+            CareTakerTeams takerTeam = new CareTakerTeams();
+            CareTakerResults takerResults = new CareTakerResults();
+            CareTakerTeams takerTeamDifferences = new CareTakerTeams();
             
-            if(!Int32.TryParse(args[1], out intervalSekunde))
+            if(!Int32.TryParse(args[1], out intervalSeconds))
             {
                 Console.WriteLine("Can't parse second parameter.");
                 return;
             }
 
-            if(!Int32.TryParse(args[2], out kontrolniInterval))
+            if(!Int32.TryParse(args[2], out controlInterval))
             {
                 Console.WriteLine("Can't parse third parameter.");
                 return;
             }
 
-            if(!Int32.TryParse(args[3], out prag))
+            if(!Int32.TryParse(args[3], out limit))
             {
                 Console.WriteLine("Can't parse fourth parameter.");
                 return;
             }
 
-            load temp = new load(fileName, prag);
+            load temp = new load(fileName, limit);
             teams t = new teams(temp.getTeams());
-            match m = new match(t.ranking, takerTim, takerTimDiff, takerRez);
-            m.play(kontrolniInterval, intervalSekunde, prag);
+            match m = new match(t.ranking, takerTeam, takerTeamDifferences, takerResults);
+            m.play(controlInterval, intervalSeconds, limit);
             //t.update();
             t.sort();
             Console.WriteLine();

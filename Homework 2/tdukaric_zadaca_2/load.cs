@@ -31,15 +31,15 @@ namespace tdukaric_zadaca_2
         /// <summary>
         /// The n
         /// </summary>
-        int prag;
+        int limit;
         /// <summary>
         /// Initializes a new instance of the <see cref="load" /> class.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <param name="prag">The prag.</param>
-        public load(string path, int prag)
+        /// <param name="limit">The prag.</param>
+        public load(string path, int limit)
         {
-            this.prag = prag;
+            this.limit = limit;
             loadTeams(path);
         }
 
@@ -73,7 +73,7 @@ namespace tdukaric_zadaca_2
                 int id;
                 int.TryParse(record.Substring(0, 5), out id);
                 string name = record.Substring(5);
-                teams.Add(new team(id, name, this.prag));
+                teams.Add(new team(id, name, this.limit));
             }
         }
     }

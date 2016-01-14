@@ -102,8 +102,8 @@ namespace tdukaric_zadaca_2
         {
             this.round = new Dictionary<KeyValuePair<team, team>, int>();
             this.n_rounds = n_rounds;
-            Console.WriteLine("Pritisak na bilo koji tipku pokreće simulaciju.");
-            Console.WriteLine("Za prekid simulacije pritisnite tipku 'p' ili pričekajte kraj simulacije.");
+            Console.WriteLine("Press any key to start the simulation.");
+            Console.WriteLine("Press the key 'p' for stopping the simulation or wait for the end.");
             Console.ReadKey(true);
             updateMemento();
 
@@ -271,17 +271,7 @@ namespace tdukaric_zadaca_2
             }
             else
                 updateMemento();
-
-            /*
-            if (blah)
-            {
-                printResults(takerTeam.Old.Count);
-                blah = false;
-            }
-
-            printResults(takerTeam.Old.Count);
-            */
-
+            
             //Event triggering for every change in efficiency
             foreach (PrintEfArg pr in list)
                 h(new object(), pr);

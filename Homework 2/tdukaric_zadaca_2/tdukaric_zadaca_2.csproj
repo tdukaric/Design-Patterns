@@ -53,10 +53,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DD669A442A4280A72B7AAA64FA4ED56D8CDD86C7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5768BD86BBCEE72C380A4C03D95F4C92EC076860</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>tdukaric_zadaca_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>tdukaric_zadaca_2_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -74,7 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="igra.cs" />
+    <Compile Include="game.cs" />
     <Compile Include="load.cs" />
     <Compile Include="match.cs" />
     <Compile Include="memento.cs" />
@@ -88,6 +88,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="tdukaric_zadaca_2_1_TemporaryKey.pfx" />
     <None Include="tdukaric_zadaca_2_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
