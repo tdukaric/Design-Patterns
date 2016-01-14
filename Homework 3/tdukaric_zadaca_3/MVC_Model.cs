@@ -285,7 +285,7 @@ namespace tdukaric_zadaca_3
             if (this.Links.Count == oldLinks.Count)
             {
                 for (int i = 0; i < this.Links.Count; i++)
-                    if (this.url != this.url)
+                    if (this.url != url)
                         diff = true;
             }
             else

@@ -41,15 +41,15 @@ namespace tdukaric_zadaca_3
         /// <summary>
         /// The sekunde
         /// </summary>
-        int sekunde;
+        int seconds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MVC_View"/> class.
         /// </summary>
-        /// <param name="sekunde">The sekunde.</param>
-        public MVC_View(int sekunde)
+        /// <param name="seconds">The sekunde.</param>
+        public MVC_View(int seconds)
         {
-            this.sekunde = sekunde;
+            this.seconds = seconds;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace tdukaric_zadaca_3
 
             timer = new Timer();
             timer.Elapsed += new ElapsedEventHandler(myController.reloadLinksAuto);
-            timer.Interval = this.sekunde * 1000;
+            timer.Interval = this.seconds * 1000;
             timer.Start();
 
             return true;
@@ -108,24 +108,24 @@ namespace tdukaric_zadaca_3
         /// </summary>
         public void commands()
         {
-            Console.WriteLine("Komande:");
-            Console.WriteLine("-B - ispis ukupnog broja poveznica");
-            Console.WriteLine("-I - ispis adresa poveznica s rednim brojem");
-            Console.WriteLine("-J n - prijelaz na poveznicu s rednim brojem n");
-            Console.WriteLine("-R - obnovi važeću web stranicu");
-            Console.WriteLine("-S - ispis statistike rada");
-            Console.WriteLine("-U - ispis trenutnog URL-a");
+            Console.WriteLine("Commands:");
+            Console.WriteLine("-B - print number of links");
+            Console.WriteLine("-I - print link by number");
+            Console.WriteLine("-J n - go to link by number");
+            Console.WriteLine("-R - refresh current web page");
+            Console.WriteLine("-S - print work statistics");
+            Console.WriteLine("-U - print current URL");
 
-            Console.WriteLine("-A - povratak na prethodnu stranicu");
+            Console.WriteLine("-A - back to previous page");
 
-            Console.WriteLine("-Q - prekid rada programa");
+            Console.WriteLine("-Q - quit");
             string command = Console.ReadLine();
             if (command.Length < 2)
                 this.commands();
             switch (command[1])
             {
                 case 'B':
-                    Console.WriteLine("Broj poveznica: " + myController.numLinks());
+                    Console.WriteLine("Number of links: " + myController.numLinks());
                     break;
                 case 'I':
                     List<KeyValuePair<string, string>> links = myController.getURLs();
@@ -133,7 +133,7 @@ namespace tdukaric_zadaca_3
                     foreach (KeyValuePair<string, string> link in links)
                     {
                         Console.WriteLine("ID: " + id + "\tURL: " + link.Key);
-                        Console.WriteLine("Tip: " + myController.getType(link.Key));
+                        Console.WriteLine("Type: " + myController.getType(link.Key));
                         id++;
                     }
                     break;
@@ -163,10 +163,10 @@ namespace tdukaric_zadaca_3
                                 var request = System.Net.WebRequest.Create(_url);
                                 using (var response = request.GetResponse())
                                 {
-                                    Console.WriteLine("Naziv: " + Path.GetFileName(_url));
-                                    Console.WriteLine("Tip: " + response.ContentType);
-                                    Console.WriteLine("Veličina: " + response.ContentLength);
-                                    Console.WriteLine("Otvoriti datoteku? (y za da) [ne]");
+                                    Console.WriteLine("Name: " + Path.GetFileName(_url));
+                                    Console.WriteLine("Type " + response.ContentType);
+                                    Console.WriteLine("Size: " + response.ContentLength);
+                                    Console.WriteLine("Open? (y for yes) [no]");
                                     string key = Console.ReadLine();
                                     if (key == "y")
                                     {
@@ -193,7 +193,7 @@ namespace tdukaric_zadaca_3
                     }
                     else
                     {
-                        Console.WriteLine("Greška kod parsiranja broja!");
+                        Console.WriteLine("Error during parsing!");
                         break;
                     }
                     break;
@@ -206,13 +206,13 @@ namespace tdukaric_zadaca_3
                     myModel.updateLinksManual();
                     break;
                 case 'S':
-                    Console.WriteLine("Prethodno otvorene stranice: ");
+                    Console.WriteLine("Previous opened pages: ");
                     myController.showStatistics();
-                    Console.WriteLine("Trenutno otvorena stranica: " + this.myModel.url);
-                    Console.WriteLine("Vrijeme zadržavanja: " + (myModel.VisitTime + DateTime.Now.Subtract(myModel.loadTime).Seconds));
-                    Console.WriteLine("Broj ručnih osvježavanja: " + myModel.ReloadTimesManual);
-                    Console.WriteLine("Broj automatskih osvježavanja: " + myModel.ReloadTimesAuto);
-                    Console.WriteLine("Broj promjena na stranici: " + myModel.noChanges);
+                    Console.WriteLine("Current opened page: " + this.myModel.url);
+                    Console.WriteLine("Waiting time: " + (myModel.VisitTime + DateTime.Now.Subtract(myModel.loadTime).Seconds));
+                    Console.WriteLine("Number of manual refresh: " + myModel.ReloadTimesManual);
+                    Console.WriteLine("Number of automatic refresh: " + myModel.ReloadTimesAuto);
+                    Console.WriteLine("Number of changes on the page: " + myModel.noChanges);
 
                     break;
                 case 'U':
@@ -229,7 +229,7 @@ namespace tdukaric_zadaca_3
         /// </summary>
         public void eventTriggered()
         {
-            Console.WriteLine("Došlo je do promjene u sadržaju stranice!");
+            Console.WriteLine("Change on the page occured!");
             return;
         }
     }
