@@ -139,7 +139,7 @@ namespace tdukaric_zadaca_4
         /// <returns>MVC_Model.</returns>
         public MVC_Model getMemento(int id)
         {
-            Spremiste spremiste = storage.LoadStorage();
+            Storage spremiste = storage.LoadStorage();
             Page page = spremiste.GetPage(Mementos[id].url);
 
             MVC_Model model;

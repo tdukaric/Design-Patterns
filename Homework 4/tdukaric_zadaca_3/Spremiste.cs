@@ -26,7 +26,7 @@ namespace tdukaric_zadaca_3
     }
 
     [Serializable()]
-    public class Spremiste : ISerializable
+    public class Storage : ISerializable
     {
         public List<Page> Pages;
         public Page page;
@@ -37,14 +37,14 @@ namespace tdukaric_zadaca_3
         public bool isNS;
         public string path;
 
-        public Spremiste()
+        public Storage()
         {
             
         }
 
         
 
-        public Spremiste(long size, bool isByte, bool isNS, string path)
+        public Storage(long size, bool isByte, bool isNS, string path)
         {
             this.Pages = new List<Page>();
             if (isByte)
@@ -102,8 +102,8 @@ namespace tdukaric_zadaca_3
                 this.Pages = this.Pages.OrderByDescending(x => x.addedDateTime).ToList();
                 this.Size -= this.Pages[0].size;
                 File.Delete(this.Pages[0].localStorageName);
-                DnevnikRada.add("Izbačena stranica " + this.Pages[0].url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Korištena " + this.Pages[0].noUsed + " puta, učitana " + this.Pages[0].addedDateTime + ". Zadnji put učitana u: " + this.Pages[0].lastUsedDateTime);
-                Console.WriteLine("Izbačena stranica " + this.Pages[0].url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Korištena " + this.Pages[0].noUsed + " puta, učitana " + this.Pages[0].addedDateTime + ". Zadnji put učitana u: " + this.Pages[0].lastUsedDateTime);
+                DnevnikRada.add("Deleted page " + this.Pages[0].url + " in " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Used " + this.Pages[0].noUsed + " times, loaded " + this.Pages[0].addedDateTime + ". Last time loaded at: " + this.Pages[0].lastUsedDateTime);
+                Console.WriteLine("Deleted page " + this.Pages[0].url + " in " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Used " + this.Pages[0].noUsed + " times, loaded " + this.Pages[0].addedDateTime + ". Last time loaded at: " + this.Pages[0].lastUsedDateTime);
                 this.Pages.Remove(this.Pages[0]);
             }
             else
@@ -111,15 +111,15 @@ namespace tdukaric_zadaca_3
                 this.Pages = this.Pages.OrderByDescending(x => x.noUsed).ToList();
                 this.Size--;
                 File.Delete(this.Pages[0].localStorageName);
-                DnevnikRada.add("Izbačena stranica " + this.Pages[0].url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Korištena " + this.Pages[0].noUsed + " puta tokom " + DateTime.Now.Subtract(this.Pages[0].addedDateTime).Seconds.ToString(CultureInfo.InvariantCulture) + " sekundi, učitana " + this.Pages[0].addedDateTime + ". Zadnji put učitana u: " + this.Pages[0].lastUsedDateTime);
-                Console.WriteLine("Izbačena stranica " + this.Pages[0].url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Korištena " + this.Pages[0].noUsed + " puta, učitana " + this.Pages[0].addedDateTime + ". Zadnji put učitana u: " + this.Pages[0].lastUsedDateTime);
+                DnevnikRada.add("Deleted page " + this.Pages[0].url + " in " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Used " + this.Pages[0].noUsed + " times during " + DateTime.Now.Subtract(this.Pages[0].addedDateTime).Seconds.ToString(CultureInfo.InvariantCulture) + " seconds, loaded " + this.Pages[0].addedDateTime + ". Last time loaded at: " + this.Pages[0].lastUsedDateTime);
+                Console.WriteLine("Deleted page " + this.Pages[0].url + " in " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + ". Used " + this.Pages[0].noUsed + " times, loaded " + this.Pages[0].addedDateTime + ". Last time loaded at: " + this.Pages[0].lastUsedDateTime);
                 this.Pages.Remove(this.Pages[0]);
             }
             
             this.Pages.Add(page);
             this.page = page;
 
-            DnevnikRada.add("Učitana stranica " + url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            DnevnikRada.add("Loaded page " + url + " u " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
         }
 
         public Page pageExist(string url)
@@ -171,7 +171,7 @@ namespace tdukaric_zadaca_3
             
         }
 
-        public Spremiste(SerializationInfo info, StreamingContext ctxt)
+        public Storage(SerializationInfo info, StreamingContext ctxt)
         {
             this.Pages = (List<Page>) info.GetValue("Pages", typeof (List<Page>));
             this.page = (Page) info.GetValue("page", typeof (Page));
@@ -186,9 +186,9 @@ namespace tdukaric_zadaca_3
 
     public static class storage
     {
-        public static Spremiste LoadStorage()
+        public static Storage LoadStorage()
         {
-            Spremiste spremiste = new Spremiste();
+            Storage storage = new Storage();
             XmlDocument xmlDocument = new XmlDocument();
             try
             {
@@ -196,39 +196,39 @@ namespace tdukaric_zadaca_3
             }
             catch (Exception)
             {
-                Console.WriteLine("Ne postoji datoteka spremišta!");
-                Console.WriteLine("Stvara se nova...");
+                Console.WriteLine("Storage file doesn't exist!");
+                Console.WriteLine("Creating a new storage...");
             }
             
             string xmlString = xmlDocument.OuterXml;
 
             using (StringReader read = new StringReader(xmlString))
             {
-                Type outType = typeof(Spremiste);
+                Type outType = typeof(Storage);
 
                 XmlSerializer serializer = new XmlSerializer(outType);
                 using (XmlReader reader = new XmlTextReader(read))
                 {
-                    spremiste = (Spremiste)serializer.Deserialize(reader);
+                    storage = (Storage)serializer.Deserialize(reader);
                     reader.Close();
                 }
 
                 read.Close();
             }
-            return spremiste;
+            return storage;
         }
 
-        public static bool SaveStorage(Spremiste spremiste)
+        public static bool SaveStorage(Storage storage)
         {
             try
             {
 
                 string attributeXml = string.Empty;
                 XmlDocument xmlDocument = new XmlDocument();
-                XmlSerializer serializer = new XmlSerializer(spremiste.GetType());
+                XmlSerializer serializer = new XmlSerializer(storage.GetType());
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    serializer.Serialize(stream, spremiste);
+                    serializer.Serialize(stream, storage);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
                     xmlDocument.Save("spremiste.dat");
@@ -239,7 +239,7 @@ namespace tdukaric_zadaca_3
             }
             catch
             {
-                Console.WriteLine("Ne mogu stvoriti datoteku spremišta!");
+                Console.WriteLine("Can't create the storage file!");
                 return false;
             }
         }

@@ -75,24 +75,24 @@ namespace tdukaric_zadaca_4
 
             MVC_Model myModel;
 
-            Spremiste spremiste;
+            Storage storage;
 
             if (!isClean)
             {
 
                 try
                 {
-                    storage.LoadStorage();
+                    tdukaric_zadaca_3.storage.LoadStorage();
                 }
                 catch
                 {
-                    spremiste = new Spremiste(maxSize, isByte, isNS, path);
-                    storage.SaveStorage(spremiste);
+                    storage = new Storage(maxSize, isByte, isNS, path);
+                    tdukaric_zadaca_3.storage.SaveStorage(storage);
                 }
 
 
-                spremiste = storage.LoadStorage();
-                Page page = spremiste.GetPage(url);
+                storage = tdukaric_zadaca_3.storage.LoadStorage();
+                Page page = storage.GetPage(url);
                 if (page != null)
                     myModel = new MVC_Model(page);
                 else

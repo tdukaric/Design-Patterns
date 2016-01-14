@@ -47,10 +47,10 @@ namespace tdukaric_zadaca_4
         /// <summary>
         /// Initializes a new instance of the <see cref="MVC_View"/> class.
         /// </summary>
-        /// <param name="sekunde">The sekunde.</param>
-        public MVC_View(int sekunde)
+        /// <param name="seconds">The seconds.</param>
+        public MVC_View(int seconds)
         {
-            this.sekunde = sekunde;
+            this.sekunde = seconds;
         }
 
         /// <summary>
@@ -109,26 +109,26 @@ namespace tdukaric_zadaca_4
         /// </summary>
         public void commands()
         {
-            Console.WriteLine("Komande:");
-            Console.WriteLine("-B - ispis ukupnog broja poveznica");
-            Console.WriteLine("-I - ispis adresa poveznica s rednim brojem");
-            Console.WriteLine("-J n - prijelaz na poveznicu s rednim brojem n");
-            Console.WriteLine("-R - obnovi važeću web stranicu");
-            Console.WriteLine("-S - ispis statistike rada");
-            Console.WriteLine("-U - ispis trenutnog URL-a");
+            Console.WriteLine("Commands:");
+            Console.WriteLine("-B - print number of links");
+            Console.WriteLine("-I - print link by number");
+            Console.WriteLine("-J n - go to link by number");
+            Console.WriteLine("-R - refresh current web page");
+            Console.WriteLine("-S - print work statistics");
+            Console.WriteLine("-U - print current URL");
 
-            Console.WriteLine("-A - povratak na prethodnu stranicu");
-            Console.WriteLine("-D - brisanje spremnika");
-            Console.WriteLine("-P - prikaz spremnika");
+            Console.WriteLine("-A - back to previous page");
+            Console.WriteLine("-D - delete storage");
+            Console.WriteLine("-P - show storage");
 
-            Console.WriteLine("-Q - prekid rada programa");
+            Console.WriteLine("-Q - quit");
             string command = Console.ReadLine();
             if (command.Length < 2)
                 this.commands();
             switch (command[1])
             {
                 case 'B':
-                    Console.WriteLine("Broj poveznica: " + myController.numLinks());
+                    Console.WriteLine("Number of links: " + myController.numLinks());
                     break;
                 case 'I':
                     List<KeyValuePair<string, string>> links = myController.getURLs();
@@ -154,13 +154,13 @@ namespace tdukaric_zadaca_4
                     if (int.TryParse(commands[1], out _id))
                     {
                         string _url = myController.getURL(_id);
-                        string tip = myController.getType(_url);
-                        if (tip == "link/other")
+                        string type = myController.getType(_url);
+                        if (type == "link/other")
                         {
                             myModel = myController.newPage(_id);
                             try
                             {
-                                myController.spremiste.page.noUsed--;
+                                myController.storage.page.noUsed--;
                             }
                             catch 
                             {
@@ -172,7 +172,7 @@ namespace tdukaric_zadaca_4
                             timer.Stop();
                             reloadController();
                         }
-                        else if (tip == "email")
+                        else if (type == "email")
                         {
                             Process.Start(_url);
                         }
@@ -182,10 +182,10 @@ namespace tdukaric_zadaca_4
                                 var request = System.Net.WebRequest.Create(_url);
                                 using (var response = request.GetResponse())
                                 {
-                                    Console.WriteLine("Naziv: " + Path.GetFileName(_url));
-                                    Console.WriteLine("Tip: " + response.ContentType);
-                                    Console.WriteLine("Veličina: " + response.ContentLength);
-                                    Console.WriteLine("Otvoriti datoteku? (y za da) [ne]");
+                                    Console.WriteLine("Name: " + Path.GetFileName(_url));
+                                    Console.WriteLine("Type " + response.ContentType);
+                                    Console.WriteLine("Size: " + response.ContentLength);
+                                    Console.WriteLine("Open? (y for yes) [no]");
                                     string key = Console.ReadLine();
                                     if (key == "y")
                                     {
@@ -199,7 +199,7 @@ namespace tdukaric_zadaca_4
                                         }
                                         catch
                                         {
-                                            Console.WriteLine("Greška!");
+                                            Console.WriteLine("Error!");
                                         }
                                     }
 
@@ -212,7 +212,7 @@ namespace tdukaric_zadaca_4
                     }
                     else
                     {
-                        Console.WriteLine("Greška kod parsiranja broja!");
+                        Console.WriteLine("Error during parsing!");
                         break;
                     }
                     break;
@@ -225,13 +225,13 @@ namespace tdukaric_zadaca_4
                     myModel.updateLinksManual();
                     break;
                 case 'S':
-                    Console.WriteLine("Prethodno otvorene stranice: ");
+                    Console.WriteLine("Previous opened pages: ");
                     myController.showStatistics();
-                    Console.WriteLine("Trenutno otvorena stranica: " + this.myModel.url);
-                    Console.WriteLine("Vrijeme zadržavanja: " + (myModel.VisitTime + DateTime.Now.Subtract(myModel.loadTime).Seconds));
-                    Console.WriteLine("Broj ručnih osvježavanja: " + myModel.ReloadTimesManual);
-                    Console.WriteLine("Broj automatskih osvježavanja: " + myModel.ReloadTimesAuto);
-                    Console.WriteLine("Broj promjena na stranici: " + myModel.noChanges);
+                    Console.WriteLine("Current opened page: " + this.myModel.url);
+                    Console.WriteLine("Waiting time: " + (myModel.VisitTime + DateTime.Now.Subtract(myModel.loadTime).Seconds));
+                    Console.WriteLine("Number of manual refresh: " + myModel.ReloadTimesManual);
+                    Console.WriteLine("Number of automatic refresh: " + myModel.ReloadTimesAuto);
+                    Console.WriteLine("Number of changes on the page: " + myModel.noChanges);
 
                     break;
                 case 'U':
@@ -254,7 +254,7 @@ namespace tdukaric_zadaca_4
         /// </summary>
         public void eventTriggered()
         {
-            Console.WriteLine("Došlo je do promjene u sadržaju stranice!");
+            Console.WriteLine("Change on the page occured!");
             return;
         }
 
@@ -262,10 +262,10 @@ namespace tdukaric_zadaca_4
         {
             int id = 1;
             Console.WriteLine(String.Format("┌───┬───────────────────────────────────┬───────┬────────┬───────────────────┐"));
-                Console.WriteLine(String.Format("│{0, 3}│{1, -35}│{2, 7}│{3, -8}│{4, -19}│", "id", "lokalna datoteka", "noUsed", "Veličina", "Dodano"));
+                Console.WriteLine(String.Format("│{0, 3}│{1, -35}│{2, 7}│{3, -8}│{4, -19}│", "id", "local file", "noUsed", "Veličina", "Dodano"));
 
                 Console.WriteLine(String.Format("├───┼───────────────────────────────────┼───────┼────────┼───────────────────┤"));
-            foreach (Page page in myController.spremiste.Pages)
+            foreach (Page page in myController.storage.Pages)
             {
                 if(page.localStorageName.Length > 35)
                     Console.WriteLine("│{0, 3}│{1, -35}│{2, 7}│{3, -8}│{4, -19}│", id, page.localStorageName.Substring(0,35), page.noUsed, page.size, page.addedDateTime);

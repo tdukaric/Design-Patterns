@@ -50,7 +50,7 @@ namespace tdukaric_zadaca_4
         private Page activePage;
         private string path;
 
-        public Spremiste spremiste;
+        public Storage storage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MVC_Controller"/> class.
@@ -75,9 +75,9 @@ namespace tdukaric_zadaca_4
                 }
                 catch
                 {
-                    Console.WriteLine("Ne postoji datoteka spremišta!");
-                    Console.WriteLine("Stvara se nova...");
-                    this.spremiste = new Spremiste(maxSize, isByte, isNS, path);
+                    Console.WriteLine("Storage file doesn't exist!");
+                    Console.WriteLine("Creating a new one...");
+                    this.storage = new Storage(maxSize, isByte, isNS, path);
                     SaveStorage();
                 }
             }
@@ -86,7 +86,7 @@ namespace tdukaric_zadaca_4
 
         public void cleanStorage()
         {
-            this.spremiste = new Spremiste(this.maxSize, this.isByte, this.isNS, this.path);
+            this.storage = new Storage(this.maxSize, this.isByte, this.isNS, this.path);
             DirectoryInfo dir = new DirectoryInfo(this.path);
             foreach (FileInfo file in dir.GetFiles())
             {
@@ -103,12 +103,12 @@ namespace tdukaric_zadaca_4
 
             using (StringReader read = new StringReader(xmlString))
             {
-                Type outType = typeof(Spremiste);
+                Type outType = typeof(Storage);
 
                 XmlSerializer serializer = new XmlSerializer(outType);
                 using (XmlReader reader = new XmlTextReader(read))
                 {
-                    this.spremiste = (Spremiste)serializer.Deserialize(reader);
+                    this.storage = (Storage)serializer.Deserialize(reader);
                     reader.Close();
                 }
 
@@ -123,10 +123,10 @@ namespace tdukaric_zadaca_4
                 
                 string attributeXml = string.Empty;
                 XmlDocument xmlDocument = new XmlDocument();
-                XmlSerializer serializer = new XmlSerializer(spremiste.GetType());
+                XmlSerializer serializer = new XmlSerializer(storage.GetType());
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    serializer.Serialize(stream, spremiste);
+                    serializer.Serialize(stream, storage);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
                     xmlDocument.Save("spremiste.dat");
@@ -137,7 +137,7 @@ namespace tdukaric_zadaca_4
             }
             catch
             {
-                Console.WriteLine("Ne mogu stvoriti datoteku spremišta!");
+                Console.WriteLine("Can't opet a storage file!");
                 return false;
             }
         }
@@ -154,12 +154,12 @@ namespace tdukaric_zadaca_4
             this.myModel = myModel;
             this.myView = myView;
             
-            activePage = spremiste.GetPage(myModel.url);
+            activePage = storage.GetPage(myModel.url);
             
             if (activePage == null)
             { 
-                spremiste.NewPage(myModel.url);
-                activePage = spremiste.GetPage(myModel.url);
+                storage.NewPage(myModel.url);
+                activePage = storage.GetPage(myModel.url);
             }
 
             SaveStorage();
@@ -261,11 +261,11 @@ namespace tdukaric_zadaca_4
             string url = this.getURL(id);
             if (url == null)
             {
-                Console.WriteLine("Greška! Nema te oznake!");
+                Console.WriteLine("Error! Type doesn't exist!");
                 return myModel;
             }
 
-            Page page = spremiste.GetPage(url);
+            Page page = storage.GetPage(url);
 
             if (page != null)
             {
@@ -274,7 +274,7 @@ namespace tdukaric_zadaca_4
             }
 
             int exist = this.checkIfExist(url);
-            Page existInstorage = spremiste.pageExist(url);
+            Page existInstorage = storage.pageExist(url);
             if (exist == 0)
                 myModel = new MVC_Model(url, old_url);
             else
@@ -358,10 +358,10 @@ namespace tdukaric_zadaca_4
             foreach (Memento temp in caretaker.Mementos)
             {
                 Console.WriteLine("URL: " + temp.url);
-                Console.WriteLine("Vrijeme zadržavanja: " + temp.VisitTime);
-                Console.WriteLine("Broj ručnih osvježavanja: " + temp.ReloadTimesManual);
-                Console.WriteLine("Broj automatskih osvježavanja: " + temp.ReloadTimesAuto);
-                Console.WriteLine("Broj promjena na stranici: " + temp.noChange);
+                Console.WriteLine("Holding time: " + temp.VisitTime);
+                Console.WriteLine("Number of manual refresh: " + temp.ReloadTimesManual);
+                Console.WriteLine("Number of automatic refresh: " + temp.ReloadTimesAuto);
+                Console.WriteLine("Number of changes on the page: " + temp.noChange);
                 Console.WriteLine();
             }
         }
